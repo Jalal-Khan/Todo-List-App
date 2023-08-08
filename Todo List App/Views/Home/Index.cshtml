@@ -1,63 +1,60 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>My To-Do List!</title>
-    <link href="./css/site.css"
-          rel="stylesheet"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-          crossorigin="anonymous">
-</head>
-<body>
+﻿@model Todo_List_App.Models.IndexViewModel
+
 <div class="card">
     <h5 class="card-header">To Do List</h5>
-  <div class="card-body">
+    <div class="card-body">
+        <!-- SEARCH BAR -->
+        <div class="search">
+            <input type="text" class="search__input" placeholder="Type your text">
+            <button class="search__button">
+                <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24">
+                    <g>
+                        <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                    </g>
+                </svg>
+            </button>
+        </div>
+        <!-- END OF SEARCH BAR -->
+        <div class="parent">
+            <div  >
+                @foreach(var task in Model.Tasks)
+                {
+                    <div class="checkbox-wrapper">
+                        <input  class="check" type="checkbox" checked = "@task.IsSelected">
+                        <label class="label" for="check1-61">
+                            <svg viewBox="0 0 95 95" height="45" width="45">
+                                <rect fill="none" stroke="black" height="50" width="50" y="20" x="30"></rect>
+                                <g transform="translate(0,-952.36222)">
+                                    <path class="path1" fill="none" stroke-width="3" stroke="black" d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4"></path>
+                                </g>
+                            </svg>
 
-
-            <div class="search">
-                <input type="text" class="search__input" placeholder="Type your text">
-                <button class="search__button">
-                    <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24">
-                        <g>
-                            <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
-                        </g>
-                    </svg>
-                </button>
+                        </label>
+                        <!--  -->
+                        <span>
+                            <p class="inner-card-text">@task.Text</p>
+                        </span>
+                        <form asp-action="Delete">
+                            <input value="@task.Id" name="id" style="visibility:hidden" />
+                            <input class="button--submit" value="Delete" type="submit">
+                        </form>
+                    </div>
+                }
             </div>
-
-            
-            
-            <div class="parent">
-              
-                    
-                        <div class="checkbox-wrapper">
-                            <input id="check1-61" class="check" type="checkbox">
-                            <label class="label" for="check1-61">
-                                <svg viewBox="0 0 95 95" height="45" width="45">
-                                    <rect fill="none" stroke="black" height="50" width="50" y="20" x="30"></rect>
-                                    <g transform="translate(0,-952.36222)">
-                                        <path class="path1" fill="none" stroke-width="3" stroke="black" d="m 56,963 c -102,122 6,9 7,9 17,-5 -66,69 -38,52 122,-77 -7,14 18,4 29,-11 45,-43 23,-4"></path>
-                                    </g>
-                                </svg>
-                            
-                            </label>
-                        
-                    
-
-                             <span>
-                                <p class="inner-card-text">With supporting text below as a natural lead-in to additional content.</p>
-                             </span>
-
-                    
-                              <a href="#" class="btn btn-primary">Delete</a>
-                          </div>
-                    
-
-            </div>
-   
- </div>
-
-
-</div>   
-</body>
-</html>
+            <!-- END OF -->
+        </div>
+        <!-- CLEAR ALL BUTTON -->
+        <form>
+            <input class="button--submit" value="Clear All" type="submit" asp-action="ClearList">
+        </form>
+        <!--END OF CLEAR ALL BUTTON -->
+        <!-- ADD A TASK -->
+        <div class="input-group">
+            <form method="post" asp-action="Add">                
+                <input type="text" class="input" value="@ViewData["TaskString"]" name="taskString" id="Email" name="Email" placeholder="Add new todo it" autocomplete="off">
+                <input class="button--submit" value="+Add" type="submit">
+            </form>
+        </div>
+        <!-- END OF ADD A TASK -->
+    </div>
+</div>
