@@ -53,8 +53,9 @@ body {
     border: none;
     color: #646464;
     padding: 0.7rem 1rem;
-    border-radius: 30px;
+    border-radius: 10px;
     width: 12em;
+    height:40px;
     transition: all ease-in-out .5s;
     margin-right: -2rem;
 }
@@ -145,14 +146,14 @@ body {
 }
 .checkbox-wrapper {
     display: flex;
-    justify-content:center;
+    justify-content:space-between;
     border: 1px solid gray;
     padding: 1rem 1rem;
    
 }
 
 button {
-    font-size: 17px;
+    font-size: 15px;
     padding: 0.5em 2em;
     border: transparent;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.4);

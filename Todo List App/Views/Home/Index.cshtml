@@ -1,5 +1,5 @@
 ﻿@model Todo_List_App.Models.IndexViewModel
-
+<div style="display:flex;flex-direction:column">
 <div class="card">
     <h5 class="card-header">To Do List</h5>
     <div class="card-body">
@@ -72,4 +72,61 @@
         <!-- END OF ADD A TASK -->
     </div>
 </div>
-.
+
+<br />
+
+
+
+<div class="card" >
+    <h5 class="card-header">To Do List</h5>
+    <div class="card-body">
+        <!-- SEARCH BAR -->
+        <form method="get" asp-action="Search">
+            <div class="search">
+                    <input type="search" class="search__input" placeholder="Search Here" value="@ViewData["SearchString"]" name="searchString" 
+                    style="height:19px;">
+                <button class="search__button">
+                        <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24" style=" height: 1em;
+                             width: 1em;">
+                        <g>
+                            <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+        </form>
+        <!-- END OF SEARCH BAR -->
+
+        <div class="parent">
+            <div style="display:flex; flex-direction:column;">
+                @foreach (var task in Model.Tasks)
+                {
+                    if(task.IsSelected==false)
+                    {
+                        <div class="checkbox-wrapper">
+                            <form asp-action="UpdateSelectedStatus" asp-controller="Home" method="post">
+                                <input value="@task.Id" name="id" style="display:none" />
+                                <input id="@task.Id" type="checkbox" name="myCheckbox" checked="@task.IsSelected" value="@task.IsSelected" oninput="this.parentElement.submit();" />
+                                <label for="@task.Id" class="@((task.IsSelected) ? "strikethrough" : "")" value="@task.Id" name="id">@task.Text</label>
+                            </form>
+                        </div>
+                    }
+                }
+
+                <label style="display:flex;">Completed</label>
+                    @foreach (var task in Model.Tasks)
+                    {
+                     if (task.IsSelected == true)
+                        {
+                            <div class="checkbox-wrapper">
+                                <form asp-action="UpdateSelectedStatus" asp-controller="Home" method="post">
+                                    <input value="@task.Id" name="id" style="display:none" />
+                                    <input id="@task.Id" type="checkbox" name="myCheckbox" checked="@task.IsSelected" value="@task.IsSelected" oninput="this.parentElement.submit();" />
+                                    <label for="@task.Id" class="@((task.IsSelected) ? "strikethrough" : "")" value="@task.Id" name="id">@task.Text</label>
+                                </form>
+                            </div>
+                        }
+                    }
+            </div>
+        </div>
+        </div>
