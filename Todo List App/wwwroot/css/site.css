@@ -95,7 +95,7 @@ body {
 
 
 
-.checkbox-wrapper input[type="checkbox"] {
+/*.checkbox-wrapper input[type="checkbox"] {
     visibility: hidden;
     display: none;
 }
@@ -116,7 +116,7 @@ body {
         width: 50px;
         height: 50px;
         position: absolute;
-        opacity: 0;
+        opacity: 1;
     }
 
     .checkbox-wrapper .label svg {
@@ -128,12 +128,14 @@ body {
         stroke-dashoffset: 400;
         transition: .5s stroke-dashoffset;
         opacity: 0;
-    }
-
-    .checkbox-wrapper .check:checked + label svg g path {
+    }*/
+.strikethrough{
+    text-decoration: line-through;
+}
+/*    .checkbox-wrapper .check:checked + label svg g path {
         stroke-dashoffset: 0;
         opacity: 1;
-    }
+    }*/
 
 .parent {
     text-align: center;
