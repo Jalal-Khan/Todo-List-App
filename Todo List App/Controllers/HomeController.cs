@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using Todo_List_App.Models;
 using Todo_List_App.Models.Domain;
@@ -92,5 +93,11 @@ namespace Todo_List_App.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+/*        public IActionResult GetSvgIcon(string iconName)
+        {
+            var svgPath = $"icons/{iconName}.svg"; // Update the path based on your folder structure
+            return PhysicalFile(svgPath, "image/svg+xml");
+        }*/
     }
 }
