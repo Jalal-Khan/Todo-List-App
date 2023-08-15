@@ -30,7 +30,24 @@ namespace Todo_List_App.Controllers
             _tasks.Clear();
             return View("Index", new IndexViewModel());
         }
+        public IActionResult Edit(string id)
+        {
+            Guid idGuid = Guid.Parse(id);
+            var todo = _tasks.FirstOrDefault(x => x.Id == idGuid);
+            if (todo != null) 
+            {
+                var viewModel = new EditTaskViewModel()
+                {
+                    Id = todo.Id,
+                    IsSelected = todo.IsSelected,
+                    Text = todo.Text,
+                };
+                _tasks.Add(todo);
+            return View("EditTask", viewModel);
+            }
+            return RedirectToAction("Index");
 
+        }
         public IActionResult Delete(string id)
         {
             Guid idGuid = Guid.Parse(id);
@@ -94,10 +111,6 @@ namespace Todo_List_App.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-/*        public IActionResult GetSvgIcon(string iconName)
-        {
-            var svgPath = $"icons/{iconName}.svg"; // Update the path based on your folder structure
-            return PhysicalFile(svgPath, "image/svg+xml");
-        }*/
+
     }
 }

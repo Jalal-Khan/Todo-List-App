@@ -1,5 +1,6 @@
 ﻿@model Todo_List_App.Models.IndexViewModel
 @using System.Linq
+<i class="fa-regular fa-pen-to-square"></i>
 <div style="display:flex;flex-direction:column">
     <div class="card">
         <h5 class="card-header">To Do List</h5>
@@ -18,7 +19,6 @@
                 </div>
             </form>
             <!-- END OF SEARCH BAR -->
-            
             <div class="parent">
                 <div style="display:flex; flex-direction:column">
                     @foreach(var task in Model.Tasks)
@@ -31,15 +31,22 @@
                                         <input id="@task.Id" type="checkbox" name="myCheckbox" checked="@task.IsSelected" value="@task.IsSelected" oninput="this.parentElement.submit();" />
                                         <label for="@task.Id" class="@((task.IsSelected) ? "strikethrough" : "")" value="@task.Id" name="id">@task.Text</label>
                                     </form>
-                                    <form asp-action="Delete">
+                                <div class="editdeletebtnalignment" style="display:flex;">
+                                    <form asp-action="Edit" asp-controller="Home" class="editform">
                                         <input value="@task.Id" name="id" style="display:none" />
-                                       @* <input class="button--submit" value="Delete" type="submit">*@
-                                       <button class="btn">
-                                        <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
-                                            <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
-                                        </svg>
-                                    </button>
+                                        <button class="editbtn" type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="editicon" height="1em" viewBox="0 0 512 512">< https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" /></svg>
+                                        </button>
                                     </form>
+                                            <form asp-action="Delete">
+                                                <input value="@task.Id" name="id" style="display:none" />
+                                               <button class="btn">
+                                                <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
+                                                    <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
+                                                </svg>
+                                                </button>
+                                            </form>
+                                    </div>
                                 </div>
                               }
                     }
@@ -50,42 +57,34 @@
                             <div><label style="display:flex">Completed</label></div>
                         }
                     }
-                    
                     @foreach (var task in Model.Tasks)
                     {
                         if (task.IsSelected == true)
                         {
-                            @*<label style="display:flex;">Completed</label>*@
                             <div class="checkbox-wrapper">
                                 <form asp-action="UpdateSelectedStatus" asp-controller="Home" method="post">
                                     <input value="@task.Id" name="id" style="display:none" />
                                     <input id="@task.Id" type="checkbox" name="myCheckbox" checked="@task.IsSelected" value="@task.IsSelected" oninput="this.parentElement.submit();" />
                                     <label for="@task.Id" class="@((task.IsSelected) ? "strikethrough" : "")" value="@task.Id" name="id">@task.Text</label>
                                 </form>
-@*                                <form asp-action="Edit">
-                                    <input value="@task.Id" name="id" style="display:none" />
-                                    <input class="button--submit" value="Edit" type="submit">
-                                </form>*@
-                                <form asp-acion="Edit" class="btn">
-                                    <img src="icons/edit.svg" class="btn" height="10" />
-                                </form>
-                                
-
-                                <a href="@Url.RouteUrl("icons", new { iconName = "edit" })">Link to SVG Icon</a>
-
-                               
-                               
-                                <form asp-acion="Delete">
-                                    <input value="@task.Id" name="id" style="display:none" />
-                                    <button class="btn">
-                                        <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
-                                            <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
-                                        </svg>
-                                    </button>
-                                </form>
+                                <div class="editdeletebtnalignment" style="display:flex;">
+                                    <form asp-acion="Edit" class="editform" height="39" width="55">
+                                        <input value="@task.Id" name="id" style="display:none" />
+                                        <button class="editbtn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="editicon" height="1em" viewBox="0 0 512 512">< https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z" /></svg>
+                                        </button>
+                                    </form>
+                                    <form asp-action="Delete">
+                                        <input value="@task.Id" name="id" style="display:none" />
+                                        <button class="btn">
+                                            <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
+                                                <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
-                        }
-                        
+                        }   
                     }
                 </div>
             </div>
@@ -104,62 +103,3 @@
             <!-- END OF ADD A TASK -->
         </div>
     </div>
-
-    <br />
-
-    <img src="icons/edit.svg"/>
-
- @*   <div class="card">
-        <h5 class="card-header">To Do List</h5>
-        <div class="card-body">
-            <!-- SEARCH BAR -->
-            <form method="get" asp-action="Search">
-                <div class="search">
-                    <input type="search" class="search__input" placeholder="Search Here" value="@ViewData["SearchString"]" name="searchString"
-                           style="height:19px;">
-                    <button class="search__button">
-                        <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24" style=" height: 1em;
-                             width: 1em;">
-                            <g>
-                                <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
-                            </g>
-                        </svg>
-                    </button>
-                </div>
-            </form>
-            <!-- END OF SEARCH BAR -->
-
-            <div class="parent">
-                <div style="display:flex; flex-direction:column">
-                    @foreach (var task in Model.Tasks)
-                    {
-                        if (task.IsSelected == false)
-                        {
-                            <div class="checkbox-wrapper">
-                                <form asp-action="UpdateSelectedStatus" asp-controller="Home" method="post">
-                                    <input value="@task.Id" name="id" style="display:none" />
-                                    <input id="@task.Id" type="checkbox" name="myCheckbox" checked="@task.IsSelected" value="@task.IsSelected" oninput="this.parentElement.submit();" />
-                                    <label for="@task.Id" class="@((task.IsSelected) ? "strikethrough" : "")" value="@task.Id" name="id">@task.Text</label>
-                                </form>
-                            </div>
-                        }
-                    }
-
-                    <label style="display:flex">Completed</label>
-                    @foreach (var task in Model.Tasks)
-                    {
-                        if (task.IsSelected == true)
-                        {
-                            <div class="checkbox-wrapper">
-                                <form asp-action="UpdateSelectedStatus" asp-controller="Home" method="post">
-                                    <input value="@task.Id" name="id" style="display:none" />
-                                    <input id="@task.Id" type="checkbox" name="myCheckbox" checked="@task.IsSelected" value="@task.IsSelected" oninput="this.parentElement.submit();" />
-                                    <label for="@task.Id" class="@((task.IsSelected) ? "strikethrough" : "")" value="@task.Id" name="id">@task.Text</label>
-                                </form>
-                            </div>
-                        }
-                    }
-                </div>
-            </div>
-        </div>
-*@
