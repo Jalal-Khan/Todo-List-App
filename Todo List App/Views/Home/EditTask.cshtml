@@ -20,5 +20,9 @@
         <label for="" class="form-label">Task</label>
         <input type="text" class="form-control" asp-for="Text">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <form method="post" asp-controller="Home" asp-action="Index">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    @*<button type="submit" class="btn btn-primary">Submit</button>*@
+    <button type="submit" class="btn btn-primary ">Go to Home</button>
 </form>

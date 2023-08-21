@@ -30,20 +30,20 @@ namespace Todo_List_App.Controllers
             _tasks.Clear();
             return View("Index", new IndexViewModel());
         }
-        public IActionResult Edit(string id)
+        public IActionResult Edit(string id,EditTaskViewModel viewModel)
         {
             Guid idGuid = Guid.Parse(id);
             var todo = _tasks.FirstOrDefault(x => x.Id == idGuid);
             if (todo != null) 
             {
-                var viewModel = new EditTaskViewModel()
+             /*   viewModel = new EditTaskViewModel()
                 {
-                    Id = todo.Id,
-                    IsSelected = todo.IsSelected,
                     Text = todo.Text,
-                };
-                _tasks.Add(todo);
-            return View("EditTask", viewModel);
+                };*/
+
+                todo.Text = viewModel.Text;
+                return View("EditTask", viewModel);
+                
             }
             return RedirectToAction("Index");
 

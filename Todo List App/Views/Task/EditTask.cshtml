@@ -18,7 +18,21 @@
     </div>
     <div class="mb-3">
         <label for="" class="form-label">Task</label>
-        <input type="text" class="form-control" asp-for="Text">
+        <input type="text" class="input" asp-for="Text">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
+    <form method="get" asp-controller="Home" asp-action="Index">
+        <button type="submit" class="btn btn-primary">Go to Home</button>
+    </form>
+    <div class="mb-3">
+        <label for="" class="form-label">Task</label>
+        <input type="text" class="form-control" asp-for="Text">
+    </div>
+
+   
 </form>
+@*
+<form method="post" asp-action="Add">
+    <input type="text" class="input" value="@ViewData["TaskString"]" name="taskString" id="Email" name="Email" placeholder="Add new todo it" autocomplete="off">
+    <input class="button--submit" value="+Add" type="submit">
+</form>*@
