@@ -25,10 +25,10 @@ namespace Todo_List_App
             app.UseRouting();
 
             app.UseAuthorization();
-
+         
             app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }

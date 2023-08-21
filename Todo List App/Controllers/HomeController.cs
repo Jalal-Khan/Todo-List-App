@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using Todo_List_App.Models;
 using Todo_List_App.Models.Domain;
@@ -29,7 +30,24 @@ namespace Todo_List_App.Controllers
             _tasks.Clear();
             return View("Index", new IndexViewModel());
         }
+        public IActionResult Edit(string id,EditTaskViewModel viewModel)
+        {
+            Guid idGuid = Guid.Parse(id);
+            var todo = _tasks.FirstOrDefault(x => x.Id == idGuid);
+            if (todo != null) 
+            {
+             /*   viewModel = new EditTaskViewModel()
+                {
+                    Text = todo.Text,
+                };*/
 
+                todo.Text = viewModel.Text;
+                return View("EditTask", viewModel);
+                
+            }
+            return RedirectToAction("Index");
+
+        }
         public IActionResult Delete(string id)
         {
             Guid idGuid = Guid.Parse(id);
@@ -92,5 +110,7 @@ namespace Todo_List_App.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }

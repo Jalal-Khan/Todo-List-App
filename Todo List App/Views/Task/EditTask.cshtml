@@ -1,0 +1,38 @@
+﻿@model Todo_List_App.Models.EditTaskViewModel
+@{
+}
+<!-- ADD A TASK -->
+@*<div class="input-group">
+    <form method="post" asp-action="Edit">
+        <input type="text" class="input" value="@ViewData["TaskString"]" name="taskString" id="Email" name="Email" placeholder="Add new todo it" autocomplete="off">
+        <input class="button--submit" value="+Add" type="submit">
+    </form>
+</div>*@
+<!-- END OF ADD A TASK -->
+<h1>Edit Task</h1>
+<form method="post" action="Edit" class="mt-5">
+
+    <div class="mb-3">
+        <label for="" class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Task</label>
+        <input type="text" class="input" asp-for="Text">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <form method="get" asp-controller="Home" asp-action="Index">
+        <button type="submit" class="btn btn-primary">Go to Home</button>
+    </form>
+    <div class="mb-3">
+        <label for="" class="form-label">Task</label>
+        <input type="text" class="form-control" asp-for="Text">
+    </div>
+
+   
+</form>
+@*
+<form method="post" asp-action="Add">
+    <input type="text" class="input" value="@ViewData["TaskString"]" name="taskString" id="Email" name="Email" placeholder="Add new todo it" autocomplete="off">
+    <input class="button--submit" value="+Add" type="submit">
+</form>*@
